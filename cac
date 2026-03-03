@@ -1,0 +1,29 @@
+make
+
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ~/kernel_keys/MOK.key ~/kernel_keys/MOK.crt proc_inspect.ko
+
+sudo insmod proc_inspect.ko
+show all process
+sudo cat /proc/proc_inspect
+
+show specific PID
+echo 1 | sudo tee /proc/proc_inspect
+sudo cat /proc/proc_inspect
+
+switch back to all
+echo all | sudo tee /proc/proc_inspect
+remove module
+sudo rmmod proc_inspect
+
+🔎 Quick Debug Commands (If Something Fails)
+Check module loaded:
+lsmod | grep proc_inspect
+
+Check kernel log:
+dmesg | tail
+
+
+
+
+
+
